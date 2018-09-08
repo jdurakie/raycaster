@@ -17,15 +17,15 @@ l = Line.Line((0, 0, 0), (3, 0, 0))
 print(mathhelp.distanceFromPointToLine((-10, -1, -1), l))
 
 print('\ttriangleLineIntesect')
-l = Line.Line((0, 0, 0), (0, 0, 10))
-t = Triangle.Triangle((-1, -1, 5), (1, -1, 5), (0, 1, 5))
+l = Line.Line((0, 0, 0), (1, 0, 6))
+t = Triangle.Triangle((-1, -1, 3), (1, -1, 3), (0, 1, 3))
 print(mathhelp.triangleLineIntersect(t, l))
 
 print('---------------Line')
 print('\tnormalize')
 l = Line.Line((1, 1, 1), (2, 2, 2))
-print (l.normalize())
+print (l.vectorize())
 
-
-
-
+print('---------------ColorManip')
+print('\tgetShade')
+print("TODO")

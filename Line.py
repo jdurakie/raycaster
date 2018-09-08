@@ -8,12 +8,11 @@ class Line(object):
         return(str(self.start) + ' -> ' + str(self.end))
 
 
-    def normalize(self):
+    def vectorize(self):
+        #returns direction vector from origin
         try:
             return mathhelp.subtractPoint(self.end, self.start)
         except IndexError:
             print("Invalid line!")
             print(self)
             exit()
-
-

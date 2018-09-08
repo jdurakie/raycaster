@@ -8,11 +8,12 @@
 import mathhelp
 
 class Triangle(object):
-    def __init__(self, A, B, C, color=(0,255,0)):
+    def __init__(self, A, B, C, color=(0,255,0), id=0):
         self.A = A
         self.B = B
         self.C = C
         self.color = color
+        self.id = id
 
     def normal(self):
         p1 = mathhelp.subtractPoint(self.B, self.A)
