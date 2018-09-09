@@ -1,6 +1,7 @@
 import mathhelp
 import Line
 import Triangle
+import rotations
 
 print('---------------mathhelp')
 print('\tmagnitude')
@@ -29,3 +30,11 @@ print (l.vectorize())
 print('---------------ColorManip')
 print('\tgetShade')
 print("TODO")
+
+print('---------------Rotations')
+print('\tapplyRotationMatrix')
+p = (1, 2, 3)
+R = [[1, 2, 3],
+     [4, 5, 6],
+	 [7, 8, 9]]
+print(rotations.applyRotationMatrix(p, R))

@@ -3,7 +3,3 @@ class Sphere(object):
         self.center = center
         self.rad = rad
         self.color = color
-
-
-    def intersectsLine():
-        pass

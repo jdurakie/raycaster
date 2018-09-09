@@ -47,22 +47,25 @@ import meshbuilder
 #
 # ir.saveImage('outputs/triangle.png')
 
-screen = ScreenPlane.ScreenPlane(64, 32, 32)
-ir = ImageRenderer.ImageRenderer((64, 32))
-
+screen = ScreenPlane.ScreenPlane(64, 32, 8)
 tris = meshbuilder.pointsToTriangles([])
-rayGen = screen.rayGenerator()
 
-while True:
-    try:
-        ray, screenCoord = next(rayGen)
-    except StopIteration:
-        break
-    for triangle in tris:
-        intersection = mathhelp.triangleLineIntersect(triangle, ray)
-        if intersection is not None:
-            shade = colormanip.getShade(triangle, ray, intersection)
-            R = int(255 * shade)
-            ir.point(screenCoord, color=(R, R, R))
+for i in range(0, 100, 5):
+    ir = ImageRenderer.ImageRenderer((64, 32))
+    rayGen = screen.rayGenerator()
 
-ir.saveImage('outputs/triangleboth.png')
+    while True:
+        try:
+            ray, screenCoord = next(rayGen)
+        except StopIteration:
+            break
+        for triangle in tris:
+            intersection = mathhelp.triangleLineIntersect(triangle, ray)
+            if intersection is not None:
+                shade = colormanip.getShade(triangle, ray, intersection)
+                R = int(255 * shade)
+                ir.point(screenCoord, color=(R, R, R))
+    for tri in tris:
+        tri.rotateAroundAxes(-0.1, 0, 0)
+    print('Done with step ' + str(i))
+    ir.saveImage('outputs/triangle' + str(i) + '.png')

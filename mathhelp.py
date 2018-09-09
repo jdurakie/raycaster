@@ -46,10 +46,6 @@ def multiplyPointByScalar(p1, scalar):
     return (x, y, z)
 
 def areEqualFloats(f1, f2):
-    # print('Comparing numbers:')
-    # print(f1)
-    # print(f1)
-    # print('----')
     avg = (f1 + f2) / 2.0
     if avg < 0.0001:
         avg = 1
