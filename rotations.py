@@ -1,5 +1,6 @@
 import math
 from math import sin, cos
+import mathhelp
 
 def applyRotationMatrix(p1, R):
 	R_lft = [R[0][0], R[1][0], R[2][0]]
@@ -17,6 +18,13 @@ def rotatePointAroundX(p1, theta):
 	
 	return applyRotationMatrix(p1, Rx)
 
-	
+
+def rotatePointAroundPoint(p1, p2, theta_x, theta_y, theta_z):
+    translatedPoint = mathhelp.subtractPoint(p1, p2)
+    if theta_x != 0:
+        translatedPoint = rotatePointAroundX(translatedPoint, theta_x)
+        
+    #un-translate the point
+    return mathhelp.addPoint(translatedPoint, p2)
 		  
 		  

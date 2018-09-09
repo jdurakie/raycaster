@@ -28,5 +28,8 @@ class Triangle(object):
             self.C = rotations.rotatePointAroundX(self.C, theta_x)
         #TODO : other rotation axes
         
-    def rotateAroundPoint(self, p1, theta_x, theta_y, theta_z)
-        pass
+    def rotateAroundPoint(self, p1, theta_x, theta_y, theta_z):
+        self.A = rotations.rotatePointAroundPoint(self.A, p1, theta_x, theta_y, theta_z)
+        self.B = rotations.rotatePointAroundPoint(self.B, p1, theta_x, theta_y, theta_z)
+        self.C = rotations.rotatePointAroundPoint(self.C, p1, theta_x, theta_y, theta_z)
+        

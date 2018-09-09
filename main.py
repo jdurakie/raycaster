@@ -66,6 +66,6 @@ for i in range(0, 100, 5):
                 R = int(255 * shade)
                 ir.point(screenCoord, color=(R, R, R))
     for tri in tris:
-        tri.rotateAroundAxes(-0.1, 0, 0)
+        tri.rotateAroundPoint((15, 15, 30), -0.1, 0, 0)
     print('Done with step ' + str(i))
     ir.saveImage('outputs/triangle' + str(i) + '.png')
