@@ -11,13 +11,12 @@ def magnitude((float, float, float) p1):
 
 def subtractPoint((float, float, float) left, (float, float, float) right):
     cdef (float, float, float) result
-    result = (0, 0, 0)
     result[0] = left[0] - right[0]
     result[1] = left[1] - right[1]
     result[2] = left[2] - right[2]
     return result
 
-def addtPoint((float, float, float) left, (float, float, float) right):
+def addPoint((float, float, float) left, (float, float, float) right):
     cdef (float, float, float) result
     result = (0, 0, 0)
     result[0] = left[0] + right[0]

@@ -5,8 +5,10 @@
 #  /     \
 # A-------B
 
-import mathhelp
+import c_mathhelp
 import rotations
+import mathhelp
+import c_mathhelp
 
 class Triangle(object):
     def __init__(self, A, B, C, color=(0,255,0), id=0):
@@ -22,12 +24,12 @@ class Triangle(object):
         return coords + norm
 
     def centroid(self):
-        pointSum = mathhelp.addPoint(self.A, mathhelp.addPoint(self.B, self.C))
-        return mathhelp.multiplyPointByScalar(pointSum, 1.0/3.0)
+        pointSum = c_mathhelp.addPoint(self.A, c_mathhelp.addPoint(self.B, self.C))
+        return c_mathhelp.multiplyPointByScalar(pointSum, 1.0/3.0)
 
     def normal(self):
-        p1 = mathhelp.subtractPoint(self.B, self.A)
-        p2 = mathhelp.subtractPoint(self.C, self.A)
+        p1 = c_mathhelp.subtractPoint(self.B, self.A)
+        p2 = c_mathhelp.subtractPoint(self.C, self.A)
         return mathhelp.cross(p1, p2)
 
     def rotateAroundX(self, theta):
@@ -61,6 +63,6 @@ class Triangle(object):
         self.C = rotations.rotatePointAroundPointInZ(self.C, p1, theta)
 
     def translate(self, vector):
-        self.A = mathhelp.addPoint(self.A, vector)
-        self.B = mathhelp.addPoint(self.B, vector)
-        self.C = mathhelp.addPoint(self.C, vector)
+        self.A = c_mathhelp.addPoint(self.A, vector)
+        self.B = c_mathhelp.addPoint(self.B, vector)
+        self.C = c_mathhelp.addPoint(self.C, vector)

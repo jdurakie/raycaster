@@ -1,5 +1,6 @@
 import math
 import Line
+import c_mathhelp
 
 # # V1
 # def dotproduct(p1, p2):
@@ -8,12 +9,12 @@ import Line
 #            (p1[2] * p2[2])
 
 # # V2
-def dotproduct(p1, p2):
-    x1, y1, z1 = p1
-    x2, y2, z2 = p2
-    return (x1 * x2) + \
-           (y1 * y2) + \
-           (z1 * z2)
+# def dotproduct(p1, p2):
+#     x1, y1, z1 = p1
+#     x2, y2, z2 = p2
+#     return (x1 * x2) + \
+#            (y1 * y2) + \
+#            (z1 * z2)
 
 # V1
 # def magnitude(p1):
@@ -22,15 +23,15 @@ def dotproduct(p1, p2):
 #                     (p1[2] ** 2))
 
 # V2
-def magnitude(p1):
-    px, py, pz = p1
-    return math.sqrt((px * px) + 
-                     (py * py) +
-                     (pz * pz))
+# def magnitude(p1):
+#     px, py, pz = p1
+#     return math.sqrt((px * px) + 
+#                      (py * py) +
+#                      (pz * pz))
 
 def angleBetweenLines(p1, p2):
-    top = dotproduct(p1, p2)
-    bottom = magnitude(p1) * magnitude(p2)
+    top = c_mathhelp.dotproduct(p1, p2)
+    bottom = c_mathhelp.magnitude(p1) * c_mathhelp.magnitude(p2)
     if areEqualFloats(top, bottom):
         return 0
     else:
@@ -52,22 +53,22 @@ def angleBetweenLines(p1, p2):
 #     return (x, y, z)
 
 # V2
-def subtractPoint(left, right):
-    lx, ly, lz = left
-    rx, ry, rz = right
-    return (lx - rx, ly - ry, lz - rz)
+# def subtractPoint(left, right):
+#     lx, ly, lz = left
+#     rx, ry, rz = right
+#     return (lx - rx, ly - ry, lz - rz)
 
-def addPoint(left, right):
-    x = left[0] + right[0]
-    y = left[1] + right[1]
-    z = left[2] + right[2]
-    return (x, y, z)
+# def addPoint(left, right):
+#     x = left[0] + right[0]
+#     y = left[1] + right[1]
+#     z = left[2] + right[2]
+#     return (x, y, z)
 
-def multiplyPointByScalar(p1, scalar):
-    x = p1[0] * scalar
-    y = p1[1] * scalar
-    z = p1[2] * scalar
-    return (x, y, z)
+# def multiplyPointByScalar(p1, scalar):
+#     x = p1[0] * scalar
+#     y = p1[1] * scalar
+#     z = p1[2] * scalar
+#     return (x, y, z)
 
 def areEqualFloats(f1, f2):
     avg = (f1 + f2) / 2.0
@@ -80,12 +81,12 @@ def areEqualFloats(f1, f2):
     else:
         return False
 
-def normalize(p1):
-    mag = magnitude(p1)
-    x = p1[0] / mag
-    y = p1[1] / mag
-    z = p1[2] / mag
-    return (x, y, z)
+# def normalize(p1):
+#     mag = c_mathhelp.magnitude(p1)
+#     x = p1[0] / mag
+#     y = p1[1] / mag
+#     z = p1[2] / mag
+#     return (x, y, z)
 
 # # V1
 # def cross(p1, p2):
@@ -111,7 +112,7 @@ def distanceFromPointToLine(point, line):
     #calculate angle between lines
     a = angleBetweenLines(normLine, normPoint)
     #calculate distance from start of line to point (hypotenuse)
-    H = magnitude(normPoint)
+    H = c_mathhelp.magnitude(normPoint)
     return math.sin(a) * H
 
 def lineImpactsSphere(sphere, line):
@@ -215,40 +216,40 @@ def triangleLineIntersect(triangle, line):
     tA = triangle.A
     tB = triangle.B
     tC = triangle.C
-    n = normalize(triangle.normal())
+    n = c_mathhelp.normalize(triangle.normal())
     #find p (line origin) and dirv (line direction vector)
     P = line.start
     end = line.end
-    dirv = normalize(subtractPoint(P, end))
+    dirv = c_mathhelp.normalize(c_mathhelp.subtractPoint(P, end))
     #solve for d (righthand of plane equation)
-    d = dotproduct(n, tA)
+    d = c_mathhelp.dotproduct(n, tA)
     #solve for t : vector magnitude coeficcient in ray equation
     #             R(t) = P + t * dirv
-    top = d - dotproduct(n, P)
-    bottom = dotproduct(n, dirv)
+    top = d - c_mathhelp.dotproduct(n, P)
+    bottom = c_mathhelp.dotproduct(n, dirv)
     #if the bottom is 0, the line is parallel to the triangle
     #(triangle normal and dirv are perpendicular)
     if areEqualFloats(bottom, 0.0):
         return None
     t =  top / bottom
     # plug T into the equation for the ray to get ray-plane intersection
-    Q = addPoint(P, multiplyPointByScalar(dirv, t))
+    Q = c_mathhelp.addPoint(P, c_mathhelp.multiplyPointByScalar(dirv, t))
     #If the intersection is behind the screen, ignore it
     #figure out whether the point is inside the triangle or not
     # by checking if it's 'to the right' of all the triangle's edges
-    AB = subtractPoint(tB, tA)
-    AQ = subtractPoint(Q, tA)
-    ABcross = dotproduct(cross(AB, AQ), n)
+    AB = c_mathhelp.subtractPoint(tB, tA)
+    AQ = c_mathhelp.subtractPoint(Q, tA)
+    ABcross = c_mathhelp.dotproduct(cross(AB, AQ), n)
     if ABcross < 0:
         return None
-    BC = subtractPoint(tC, tB)
-    BQ = subtractPoint(Q, tB)
-    BCcross = dotproduct(cross(BC, BQ), n)
+    BC = c_mathhelp.subtractPoint(tC, tB)
+    BQ = c_mathhelp.subtractPoint(Q, tB)
+    BCcross = c_mathhelp.dotproduct(cross(BC, BQ), n)
     if BCcross < 0:
         return None
-    CA = subtractPoint(tA, tC)
-    CQ = subtractPoint(Q, tC)
-    CAcross = dotproduct(cross(CA, CQ), n)
+    CA = c_mathhelp.subtractPoint(tA, tC)
+    CQ = c_mathhelp.subtractPoint(Q, tC)
+    CAcross = c_mathhelp.dotproduct(cross(CA, CQ), n)
     if CAcross < 0:
         return None
     return Q
