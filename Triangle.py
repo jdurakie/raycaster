@@ -16,20 +16,51 @@ class Triangle(object):
         self.color = color
         self.id = id
 
+    def __repr__(self):
+        coords = str(self.A) + ',' + str(self.B) + ',' + str(self.C) + '\n'
+        norm = 'Normal: ' + str(self.normal()) 
+        return coords + norm
+
+    def centroid(self):
+        pointSum = mathhelp.addPoint(self.A, mathhelp.addPoint(self.B, self.C))
+        return mathhelp.multiplyPointByScalar(pointSum, 1.0/3.0)
+
     def normal(self):
         p1 = mathhelp.subtractPoint(self.B, self.A)
         p2 = mathhelp.subtractPoint(self.C, self.A)
         return mathhelp.cross(p1, p2)
+
+    def rotateAroundX(self, theta):
+        self.A = rotations.rotatePointAroundX(self.A, theta)
+        self.B = rotations.rotatePointAroundX(self.B, theta)
+        self.C = rotations.rotatePointAroundX(self.C, theta)
+
+    def rotateAroundY(self, theta):
+        self.A = rotations.rotatePointAroundY(self.A, theta)
+        self.B = rotations.rotatePointAroundY(self.B, theta)
+        self.C = rotations.rotatePointAroundY(self.C, theta)
+
+    def rotateAroundZ(self, theta):
+        self.A = rotations.rotatePointAroundZ(self.A, theta)
+        self.B = rotations.rotatePointAroundZ(self.B, theta)
+        self.C = rotations.rotatePointAroundZ(self.C, theta)
         
-    def rotateAroundAxes(self, theta_x, theta_y, theta_z):
-        if theta_x != 0:
-            self.A = rotations.rotatePointAroundX(self.A, theta_x)
-            self.B = rotations.rotatePointAroundX(self.B, theta_x)
-            self.C = rotations.rotatePointAroundX(self.C, theta_x)
-        #TODO : other rotation axes
+    def rotateAroundPointInX(self, p1, theta):
+        self.A = rotations.rotatePointAroundPointInX(self.A, p1, theta)
+        self.B = rotations.rotatePointAroundPointInX(self.B, p1, theta)
+        self.C = rotations.rotatePointAroundPointInX(self.C, p1, theta)
         
-    def rotateAroundPoint(self, p1, theta_x, theta_y, theta_z):
-        self.A = rotations.rotatePointAroundPoint(self.A, p1, theta_x, theta_y, theta_z)
-        self.B = rotations.rotatePointAroundPoint(self.B, p1, theta_x, theta_y, theta_z)
-        self.C = rotations.rotatePointAroundPoint(self.C, p1, theta_x, theta_y, theta_z)
-        
+    def rotateAroundPointInY(self, p1, theta):
+        self.A = rotations.rotatePointAroundPointInY(self.A, p1, theta)
+        self.B = rotations.rotatePointAroundPointInY(self.B, p1, theta)
+        self.C = rotations.rotatePointAroundPointInY(self.C, p1, theta)
+
+    def rotateAroundPointInZ(self, p1, theta):
+        self.A = rotations.rotatePointAroundPointInZ(self.A, p1, theta)
+        self.B = rotations.rotatePointAroundPointInZ(self.B, p1, theta)
+        self.C = rotations.rotatePointAroundPointInZ(self.C, p1, theta)
+
+    def translate(self, vector):
+        self.A = mathhelp.addPoint(self.A, vector)
+        self.B = mathhelp.addPoint(self.B, vector)
+        self.C = mathhelp.addPoint(self.C, vector)

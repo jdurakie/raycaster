@@ -5,6 +5,12 @@ import ScreenPlane
 import mathhelp
 import colormanip
 import meshbuilder
+import Maze
+import rotations
+import mazewalker
+
+import cProfile
+import re
 
 
 # RENDERS SPHERE MOVING TOP-LEFT TO BOTTOM-RIGHT
@@ -47,25 +53,63 @@ import meshbuilder
 #
 # ir.saveImage('outputs/triangle.png')
 
-screen = ScreenPlane.ScreenPlane(64, 32, 8)
-tris = meshbuilder.pointsToTriangles([])
 
-for i in range(0, 100, 5):
-    ir = ImageRenderer.ImageRenderer((64, 32))
-    rayGen = screen.rayGenerator()
+def castRay(ray, tris):
+    #find closest intersection
+    nearestIntersectionZ = float('inf')
+    nearestIntersectionColor = (0, 0, 0)
+    for triangle in tris:
+        intersection = mathhelp.triangleLineIntersect(triangle, ray)
+        if intersection is not None and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:
+            nearestIntersectionZ = intersection[2]
+            shade = colormanip.getShade(triangle, ray, intersection)
+            R = int(triangle.color[0] * shade)
+            G = int(triangle.color[1] * shade)
+            B = int(triangle.color[2] * shade)
+            nearestIntersectionColor = (R, G, B)
+    return nearestIntersectionColor
 
-    while True:
-        try:
-            ray, screenCoord = next(rayGen)
-        except StopIteration:
-            break
-        for triangle in tris:
-            intersection = mathhelp.triangleLineIntersect(triangle, ray)
-            if intersection is not None:
-                shade = colormanip.getShade(triangle, ray, intersection)
-                R = int(255 * shade)
-                ir.point(screenCoord, color=(R, R, R))
-    for tri in tris:
-        tri.rotateAroundPoint((15, 15, 30), -0.1, 0, 0)
-    print('Done with step ' + str(i))
-    ir.saveImage('outputs/triangle' + str(i) + '.png')
+def maze():
+    corridor = Maze.Maze(32, 32).downTurn()
+    screen = ScreenPlane.ScreenPlane(64, 32, 20)
+
+    for tri in corridor:
+        tri.translate((16, 0, 0))
+
+    for i in range(0, 30):    
+        ir = ImageRenderer.ImageRenderer((64, 32))
+        rayGen = screen.rayGenerator()
+        rotations.rotateTrisAroundCentroidInX(corridor, 0.1)
+        while True:
+            try:
+                ray, screenCoord = next(rayGen)
+            except StopIteration:
+                break
+            ir.point(screenCoord, castRay(ray, corridor))
+
+        ir.saveImage('outputs/maze' + str(i) + '.png')
+
+def drawBox():
+    screen = ScreenPlane.ScreenPlane(64, 32, 20)
+    tris = meshbuilder.makeBox()
+    for i in range(0, 300, 5):
+        ir = ImageRenderer.ImageRenderer((64, 32))
+        rayGen = screen.rayGenerator()
+        while True:
+            try:
+                ray, screenCoord = next(rayGen)
+            except StopIteration:
+                break
+            ir.point(screenCoord, castRay(ray, tris))
+        for tri in tris:
+            #tri.rotateAroundPoint((15, 15, 30), -0.1, 0, 0)
+            tri.rotateAroundPointInX((32, 16, 30), -0.1)
+            tri.rotateAroundPointInY((32, 16, 30), -0.2)
+            tri.rotateAroundPointInZ((32, 16, 30), -0.3)
+            #tri.translate((1, 0, -1))
+        print('Done with step ' + str(i))
+        ir.saveImage('outputs/triangle' + str(i) + '.png')
+#drawBox()
+#maze()
+
+mazewalker.mazewalker(64, 32)
