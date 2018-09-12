@@ -123,7 +123,7 @@ def mazewalker(width, height, mazeLength=10):
                             continue
                     except StopIteration:
                         break
-                    ir.point(screenCoord, castRay(ray, tris))
+                    ir.point(screenCoord, mathhelp.castRay(ray, tris))
                 ir.saveImage('outputs/mazewalker' + str(i) + '-' + str(j) + '.png')
                 #move 'camera' based on segment
                 if elementTypes[0] == 'straight':

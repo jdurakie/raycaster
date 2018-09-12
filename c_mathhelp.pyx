@@ -139,3 +139,77 @@ def triangleLineIntersect((float, float, float) tA,
     if CACross < 0:
         return None
     return Q
+
+
+cdef (float, float, float) c_triangleLineIntersect((float, float, float) tA, 
+                          (float, float, float) tB,
+                          (float, float, float) tC,
+                          (float, float, float) lineStart,
+                          (float, float, float) lineEnd):
+
+    #get triangle normal n
+    cdef (float, float, float) p1 = c_subtractPoint(tB, tA)
+    cdef (float, float, float) p2 = c_subtractPoint(tC, tA)
+    cdef (float, float, float) n = c_cross(p1, p2)
+    n = c_normalize(n)
+
+    #find line origin P and line direction dirv
+    cdef (float, float, float) P = lineStart
+    cdef (float, float, float) end = lineEnd
+    cdef (float, float, float) dirv = c_subtractPoint(P, end)
+    dirv = c_normalize(dirv)
+
+    #solve for d (righthand of plane equation)
+    cdef float d = c_dotproduct(n, tA)
+
+    #solve for t
+    cdef float top = d - c_dotproduct(n, P)
+    cdef float bottom = c_dotproduct(n, dirv)
+    if bottom < 0.000001 and bottom > -0.000001:
+        return (0, 0, -1)
+    t = top / bottom
+
+    #find Q (plane-line intersection)
+    dirv_t = c_multiplyPointByScalar(dirv, t)
+    cdef (float, float, float) Q = c_addPoint(P, dirv_t)
+    
+    #find whether Q is inside the triangle
+    cdef (float, float, float) AB = c_subtractPoint(tB, tA)
+    cdef (float, float, float) AQ = c_subtractPoint(Q, tA)
+    cdef float ABCross = c_dotproduct(c_cross(AB, AQ), n)
+    if ABCross < 0:
+        return (-1, -1, -1)
+
+    cdef (float, float, float) BC = c_subtractPoint(tC, tB)
+    cdef (float, float, float) BQ = c_subtractPoint(Q, tB)
+    cdef float BCCross = c_dotproduct(c_cross(BC, BQ), n)
+    if BCCross < 0:
+        return (-1, -1, -1)
+        
+    cdef (float, float, float) CA = c_subtractPoint(tA, tC)
+    cdef (float, float, float) CQ = c_subtractPoint(Q, tC)
+    cdef float CACross = c_dotproduct(c_cross(CA, CQ), n)
+    if CACross < 0:
+        return (-1, -1, -1)
+    return Q
+
+def castRay(object ray, object tris):
+    cdef float nearestIntersectionZ = 100000000
+    cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
+    cdef float dot, shade
+    cdef int R, G, B
+    cdef (float, float, float) intersection, rayd, trinorm
+    for triangle in tris:
+        intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
+
+        if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:
+                    nearestIntersectionZ = intersection[2]
+                    rayd = c_normalize(c_subtractPoint(intersection, ray.start))
+                    trinorm = c_normalize(triangle.normal())
+                    dot = c_dotproduct(rayd, trinorm)
+                    shade =  (0.3 + (0.7 * abs(dot)))
+                    R = <int>(triangle.color[0] * shade)
+                    G = <int>(triangle.color[1] * shade)
+                    B = <int>(triangle.color[2] * shade)
+                    nearestIntersectionColor = (R, G, B)
+        return nearestIntersectionColor 
