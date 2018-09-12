@@ -1,5 +1,5 @@
 import Line
-import mathhelp
+import c_mathhelp as mathhelp
 import random
 
 BLACK = (0, 0, 0)

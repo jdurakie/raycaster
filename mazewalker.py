@@ -1,6 +1,6 @@
 import Maze
 import random
-import mathhelp
+import c_mathhelp as mathhelp
 import colormanip
 import ImageRenderer
 import ScreenPlane
@@ -11,7 +11,8 @@ def castRay(ray, tris):
     nearestIntersectionZ = float('inf')
     nearestIntersectionColor = (0, 0, 0)
     for triangle in tris:
-        intersection = mathhelp.triangleLineIntersect(triangle, ray)
+        intersection = mathhelp.triangleLineIntersect(triangle.A, triangle.B, triangle.C, 
+                                                      ray.start, ray.end)
         if intersection is not None and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:
             nearestIntersectionZ = intersection[2]
             shade = colormanip.getShade(triangle, ray, intersection)
@@ -118,7 +119,7 @@ def mazewalker(width, height, mazeLength=10):
                 while True:
                     try:
                         ray, screenCoord = next(rayGen)
-                        if screenCoord[0] < 16 or screenCoord[0] >= 48:
+                        if screenCoord[0] < 17 or screenCoord[0] >= 47:
                             continue
                     except StopIteration:
                         break
