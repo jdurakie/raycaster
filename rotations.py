@@ -1,3 +1,6 @@
+"""
+Functions that do various operations relating to rotations in 3D space
+"""
 from math import sin, cos
 import mathhelp
 import Triangle

@@ -1,3 +1,7 @@
+"""
+Contains code that draws the screen to a real image
+"""
+
 from PIL import Image
 from PIL import ImageDraw
 

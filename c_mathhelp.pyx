@@ -1,3 +1,7 @@
+"""
+Various Cython math functions
+Prefer to use these over the equivalents in mathhelp.py, they are much faster
+"""
 def dotproduct((float, float, float) p1, (float, float, float) p2):
     cdef float result
     result = (p1[0] * p2[0]) + (p1[1] * p2[1]) + (p1[2] * p2[2])
@@ -193,13 +197,16 @@ cdef (float, float, float) c_triangleLineIntersect((float, float, float) tA,
         return (-1, -1, -1)
     return Q
 
-def castRay(object ray, object tris):
+def castRay(ray, tris, numTris):
     cdef float nearestIntersectionZ = 100000000
     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
     cdef float dot, shade
-    cdef int R, G, B
+    cdef float R, G, B
     cdef (float, float, float) intersection, rayd, trinorm
-    for triangle in tris:
+    cdef int count = 0
+    for triangleIdx in range(0, numTris):
+        triangle = tris[triangleIdx]
+        count = count + 1
         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
 
         if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:
@@ -208,8 +215,8 @@ def castRay(object ray, object tris):
                     trinorm = c_normalize(triangle.normal())
                     dot = c_dotproduct(rayd, trinorm)
                     shade =  (0.3 + (0.7 * abs(dot)))
-                    R = <int>(triangle.color[0] * shade)
-                    G = <int>(triangle.color[1] * shade)
-                    B = <int>(triangle.color[2] * shade)
-                    nearestIntersectionColor = (R, G, B)
-        return nearestIntersectionColor 
+                    R = triangle.color[0] * shade
+                    G = triangle.color[1] * shade
+                    B = triangle.color[2] * shade
+                    nearestIntersectionColor = (<int>R, <int>G, <int>B)
+    return nearestIntersectionColor 

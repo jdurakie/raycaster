@@ -1,3 +1,6 @@
+"""
+Used by mazewalker, generates maze segments to fly through
+"""
 # CUBE VERTEX NAMES
 # (E-F-H-G square closer to view)
 #    H-------G
@@ -11,6 +14,7 @@
 
 
 from Triangle import Triangle as T
+import colormanip
 from colormanip import GRAY
 
 class Maze(object):
@@ -31,32 +35,32 @@ class Maze(object):
     #SEGMENT GENERATION
     def floor(self, color):
         return [
-            T(self.A, self.B, self.F, color=color),
-            T(self.F, self.E, self.A, color=color)
+            T(self.A, self.B, self.F, color=colormanip.randomColorTimeBased()),
+            T(self.F, self.E, self.A, color=colormanip.randomColorTimeBased())
         ]
 
     def leftWall(self, color):
         return [
-            T(self.A, self.D, self.H, color=color),
-            T(self.H, self.E, self.A, color=color)
+            T(self.A, self.D, self.H, color=colormanip.randomColorTimeBased()),
+            T(self.H, self.E, self.A, color=colormanip.randomColorTimeBased())
         ]
 
     def rightWall(self, color):
         return [
-            T(self.B, self.F, self.G, color=color),
-            T(self.G, self.C, self.B, color=color),
+            T(self.B, self.F, self.G, color=colormanip.randomColorTimeBased()),
+            T(self.G, self.C, self.B, color=colormanip.randomColorTimeBased()),
         ]
 
     def ceiling(self, color):
         return [
-            T(self.C, self.G, self.H, color=color),
-            T(self.H, self.D, self.C, color=color)
+            T(self.C, self.G, self.H, color=colormanip.randomColorTimeBased()),
+            T(self.H, self.D, self.C, color=colormanip.randomColorTimeBased())
         ]
 
     def backWall(self, color):
         return [
-            T(self.F, self.E, self.H, color=color),
-            T(self.H, self.G, self.F, color=color)
+            T(self.F, self.E, self.H, color=colormanip.randomColorTimeBased()),
+            T(self.H, self.G, self.F, color=colormanip.randomColorTimeBased())
         ]
 
     def corridor(self, floor_color=GRAY, wall_color=GRAY, ceil_color=GRAY):

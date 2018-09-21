@@ -1,3 +1,6 @@
+"""
+Contains info about a line
+"""
 class Line(object):
     def __init__(self, start, end):
         self.start = start
@@ -6,17 +9,6 @@ class Line(object):
     def __repr__(self):
         return(str(self.start) + ' -> ' + str(self.end))
 
-    # V1
-    # def vectorize(self):
-    #     #returns direction vector from origin
-    #     try:
-    #         return mathhelp.subtractPoint(self.end, self.start)
-    #     except IndexError:
-    #         print("Invalid line!")
-    #         print(self)
-    #         exit()
-
-    # V2
     def vectorize(self):
         #Duplicate code of mathhelp.subtractPoint, here to avoid excessive function calls
         lx, ly, lz = self.end

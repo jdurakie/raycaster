@@ -1,3 +1,7 @@
+"""
+Random little tests.
+"""
+
 import mathhelp
 import Line
 import Triangle

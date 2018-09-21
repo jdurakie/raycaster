@@ -1,6 +1,11 @@
+"""
+Various functions to help with manipulating colors
+"""
 import Line
 import c_mathhelp as mathhelp
 import random
+import time
+from math import floor, sin
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -23,3 +28,26 @@ def randomColor():
     return(random.randint(0,255),
            random.randint(0,255),
            random.randint(0,255))
+
+def randomColorTimeBased():
+    # s = 32
+    # colorbase = s * s
+    # n = (time.time() * 10) % colorbase
+
+    # p = floor(n / (s * s))
+    # r = floor((n - (s * s * p)) / s)
+    # c = floor((n - (s * s * p)) - (r * s))
+
+    # red = (255 / s) * p
+    # green = (255 / s) * r
+    # blue = (255 / s) * c
+
+    # return (red, green, blue)
+
+    t = time.time() / 10
+
+    red =   (((sin(t + 0)) + 1) / 2) * 255
+    green = (((sin(t + 2)) + 1) / 2) * 255
+    blue =  (((sin(t + 4)) + 1) / 2) * 255
+    
+    return (red, green, blue)

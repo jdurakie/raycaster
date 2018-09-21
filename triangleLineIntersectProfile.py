@@ -1,3 +1,6 @@
+"""
+Test file meant to profile/benchmark the crucial TriangleLineIntersect function
+"""
 import Line
 import Triangle
 import c_mathhelp

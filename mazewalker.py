@@ -1,3 +1,6 @@
+"""
+Rendering engine demo, creates a maze that the viewpoint flies through
+"""
 import Maze
 import random
 import c_mathhelp as mathhelp
@@ -123,7 +126,8 @@ def mazewalker(width, height, mazeLength=10):
                             continue
                     except StopIteration:
                         break
-                    ir.point(screenCoord, mathhelp.castRay(ray, tris))
+                    #ir.point(screenCoord, castRay(ray, tris))
+                    ir.point(screenCoord, mathhelp.castRay(ray, tris, len(tris)))
                 ir.saveImage('outputs/mazewalker' + str(i) + '-' + str(j) + '.png')
                 #move 'camera' based on segment
                 if elementTypes[0] == 'straight':
