@@ -8,7 +8,6 @@
 import c_mathhelp
 import rotations
 import mathhelp
-import c_mathhelp
 
 class Triangle(object):
     """

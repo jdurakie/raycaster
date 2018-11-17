@@ -17,6 +17,38 @@ YELLOW = (255, 255, 0)
 CYAN = (0, 255, 255)
 MAGENTA = (255, 0, 255)
 
+
+reverseColorValueMap = {
+    BLACK: "BLACK",
+    WHITE: "WHITE",
+    GRAY: "GRAY",
+    RED: "RED",
+    GREEN: "GREEN",
+    BLUE: "BLUE",
+    YELLOW: "YELLOW",
+    CYAN: "CYAN",
+    MAGENTA: "MAGENTA"
+}
+
+def getClosestColorName(inColor):
+    """Returns color string that's closest to the input color"""
+    def rgb_diff(color1, color2):
+        tot_diff = 0
+        for i in range(0, 3):
+            tot_diff += abs(color1[i] - color2[i])
+        return tot_diff
+
+    min_diff = 1000
+    min_diff_color = BLACK
+
+    for testColor in [BLACK, WHITE, GRAY, RED, GREEN, BLUE, YELLOW, CYAN, MAGENTA]:
+        diff = rgb_diff(inColor, testColor)
+        if diff < min_diff:
+            min_diff = diff
+            min_diff_color = testColor
+
+    return reverseColorValueMap[min_diff_color]
+
 def getShade(triangle, ray, intersection):
     ray = mathhelp.normalize(Line.Line(ray.start, intersection).vectorize())
     trinorm = mathhelp.normalize(triangle.normal())

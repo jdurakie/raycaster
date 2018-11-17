@@ -1,12 +1,12 @@
-import ImageRenderer
-import Sphere
-import Triangle
-import ScreenPlane
-import mathhelp
-import colormanip
-import meshbuilder
-import Maze
-import rotations
+# import ImageRenderer
+# import Sphere
+# import Triangle
+# import ScreenPlane
+# import mathhelp
+# import colormanip
+# import meshbuilder
+# import Maze
+# import rotations
 import mazewalker
 
 
@@ -57,7 +57,7 @@ import mazewalker
 #     nearestIntersectionZ = float('inf')
 #     nearestIntersectionColor = (0, 0, 0)
 #     for triangle in tris:
-#         intersection = mathhelp.triangleLineIntersect(triangle, ray)
+#         intersection = c_mathhelp.triangleLineIntersect(triangle, ray)
 #         if intersection is not None and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:
 #             nearestIntersectionZ = intersection[2]
 #             shade = colormanip.getShade(triangle, ray, intersection)
@@ -87,7 +87,7 @@ import mazewalker
 #             #tri.translate((1, 0, -1))
 #         print('Done with step ' + str(i))
 #         ir.saveImage('outputs/triangle' + str(i) + '.png')
-#drawBox()
+# drawBox()
 #maze()
 
 # def maze():
@@ -110,4 +110,6 @@ import mazewalker
 
 #         ir.saveImage('outputs/maze' + str(i) + '.png')
 
-mazewalker.mazewalker(64, 32)
+#mazewalker.mazewalker(64, 32)
+import show_box
+show_box.show_box(64, 64)

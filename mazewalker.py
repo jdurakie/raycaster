@@ -5,7 +5,7 @@ import Maze
 import random
 import c_mathhelp as mathhelp
 import colormanip
-import ImageRenderer
+import PngImageRenderer as ImageRenderer
 import ScreenPlane
 import rotations
 

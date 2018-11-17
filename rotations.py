@@ -2,7 +2,7 @@
 Functions that do various operations relating to rotations in 3D space
 """
 from math import sin, cos
-import mathhelp
+import c_mathhelp as mathhelp
 import Triangle
 
 def applyRotationMatrix(p1, R):
@@ -54,6 +54,23 @@ def rotateTrisAroundCentroidInX(tris, theta):
     center = mathhelp.multiplyPointByScalar(pointSum, 1.0 / len(tris))
     for tri in tris:
         tri.rotateAroundPointInX(center, theta)
+
+def rotateTrisAroundCentroidInY(tris, theta):
+    pointSum = (0, 0, 0)
+    for tri in tris:
+        pointSum = mathhelp.addPoint(pointSum, tri.centroid())
+    center = mathhelp.multiplyPointByScalar(pointSum, 1.0 / len(tris))
+    for tri in tris:
+        tri.rotateAroundPointInY(center, theta)
+
+def rotateTrisAroundCentroidInZ(tris, theta):
+    pointSum = (0, 0, 0)
+    for tri in tris:
+        pointSum = mathhelp.addPoint(pointSum, tri.centroid())
+    center = mathhelp.multiplyPointByScalar(pointSum, 1.0 / len(tris))
+    for tri in tris:
+        tri.rotateAroundPointInZ(center, theta)
+
 
 def rotateTrisAroundPointInY(tris, theta, p1):
     for tri in tris:
