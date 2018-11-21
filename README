@@ -1,1 +1,15 @@
-cython and cythonize on c_mathhelp to turn it into c_mathhelp.so
+Requirements:
+	py3
+	cython
+
+	pygame for PyGameRenderer
+	curses for CursesRenderer
+	PIL for PngRenderer
+
+
+Running:
+	python3 main.py, but you may need to rebuild c_mathhelp
+
+Building:
+	run "cythonize -a -i c_mathhelp.pyx" and rename the resulting .so file to c_mathhelp.so
+

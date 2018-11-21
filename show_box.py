@@ -15,7 +15,8 @@ def show_box(width, height):
 	#create output image
 	image = ImageRenderer.ImageRenderer((width, height))
 	#create box mesh
-	boxMesh = meshbuilder.makeBox()
+	#boxMesh = meshbuilder.makeBox()
+	boxMesh = meshbuilder.makeBox2((width/2, height/2, 30), 10)
 	#rotate the box around a little while keeping track of FPS
 	lastFrameTime = time.time()
 	frameCount = 0
