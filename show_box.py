@@ -34,7 +34,7 @@ def show_box(width, height):
 				ray, screenCoord = next(rayGenerator)
 			except StopIteration:
 				break
-			image.point(screenCoord, c_mathhelp.castRay(ray, boxMesh, len(boxMesh)))
+			image.point(screenCoord, c_mathhelp.castRay(ray, boxMesh, len(boxMesh)))	
 
 		image.saveImage('outputs/box.png')
 
@@ -49,4 +49,3 @@ def show_box(width, height):
 			print("AVG FPS: " + str(fps))
 			frameCount = 0
 			totalFrameTime = 0
-`
