@@ -62,19 +62,6 @@ def randomColor():
            random.randint(0,255))
 
 def randomColorTimeBased():
-    # s = 32
-    # colorbase = s * s
-    # n = (time.time() * 10) % colorbase
-
-    # p = floor(n / (s * s))
-    # r = floor((n - (s * s * p)) / s)
-    # c = floor((n - (s * s * p)) - (r * s))
-
-    # red = (255 / s) * p
-    # green = (255 / s) * r
-    # blue = (255 / s) * c
-
-    # return (red, green, blue)
 
     t = time.time() / 10
 

@@ -54,7 +54,6 @@ class ImageRenderer(object):
 
     def point(self, location, color=(255, 0, 0)):
         char = self.rgb_to_grayscale_char_2(color)
-        #char = self.rgb_to_char(color)
 
         maxHeight, maxWidth = self.screen.getmaxyx()
         if location[0] > maxWidth or location[1] > maxHeight:

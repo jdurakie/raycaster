@@ -5,7 +5,7 @@
     "distutils": {
         "name": "c_mathhelp",
         "sources": [
-            "/home/jdurakie/Storage/backups-2/side/renderer/repo/raycaster/c_mathhelp.pyx"
+            "/home/jdurakie/Side/repo/raycaster/c_mathhelp.pyx"
         ]
     },
     "module_name": "c_mathhelp"
@@ -848,7 +848,7 @@ struct __pyx_ctuple_float__and_float__and_float {
 
 /* "c_mathhelp.pyx":202
  * def castRay(ray, tris, numTris):
- *     cdef float nearestIntersectionZ = 100000000
+ *     cdef float nearestIntersectionZ = 10000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)             # <<<<<<<<<<<<<<
  *     cdef float dot, shade
  *     cdef float R, G, B
@@ -3713,7 +3713,7 @@ static __pyx_ctuple_float__and_float__and_float __pyx_f_10c_mathhelp_c_triangleL
  *     return Q
  * 
  * def castRay(ray, tris, numTris):             # <<<<<<<<<<<<<<
- *     cdef float nearestIntersectionZ = 100000000
+ *     cdef float nearestIntersectionZ = 10000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  */
 
@@ -3826,15 +3826,15 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
   /* "c_mathhelp.pyx":201
  * 
  * def castRay(ray, tris, numTris):
- *     cdef float nearestIntersectionZ = 100000000             # <<<<<<<<<<<<<<
+ *     cdef float nearestIntersectionZ = 10000000             # <<<<<<<<<<<<<<
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  *     cdef float dot, shade
  */
-  __pyx_v_nearestIntersectionZ = 100000000.0;
+  __pyx_v_nearestIntersectionZ = 10000000.0;
 
   /* "c_mathhelp.pyx":202
  * def castRay(ray, tris, numTris):
- *     cdef float nearestIntersectionZ = 100000000
+ *     cdef float nearestIntersectionZ = 10000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)             # <<<<<<<<<<<<<<
  *     cdef float dot, shade
  *     cdef float R, G, B
@@ -4173,7 +4173,7 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
  *     return Q
  * 
  * def castRay(ray, tris, numTris):             # <<<<<<<<<<<<<<
- *     cdef float nearestIntersectionZ = 100000000
+ *     cdef float nearestIntersectionZ = 10000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  */
 
@@ -4434,7 +4434,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     return Q
  * 
  * def castRay(ray, tris, numTris):             # <<<<<<<<<<<<<<
- *     cdef float nearestIntersectionZ = 100000000
+ *     cdef float nearestIntersectionZ = 10000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  */
   __pyx_tuple__18 = PyTuple_Pack(16, __pyx_n_s_ray, __pyx_n_s_tris, __pyx_n_s_numTris, __pyx_n_s_nearestIntersectionZ, __pyx_n_s_nearestIntersectionColor, __pyx_n_s_dot, __pyx_n_s_shade, __pyx_n_s_R, __pyx_n_s_G, __pyx_n_s_B, __pyx_n_s_intersection, __pyx_n_s_rayd, __pyx_n_s_trinorm, __pyx_n_s_count, __pyx_n_s_triangleIdx, __pyx_n_s_triangle); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 200, __pyx_L1_error)
@@ -4818,7 +4818,7 @@ if (!__Pyx_RefNanny) {
  *     return Q
  * 
  * def castRay(ray, tris, numTris):             # <<<<<<<<<<<<<<
- *     cdef float nearestIntersectionZ = 100000000
+ *     cdef float nearestIntersectionZ = 10000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10c_mathhelp_17castRay, NULL, __pyx_n_s_c_mathhelp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
