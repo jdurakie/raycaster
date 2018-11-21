@@ -198,15 +198,13 @@ cdef (float, float, float) c_triangleLineIntersect((float, float, float) tA,
     return Q
 
 def castRay(ray, tris, numTris):
-    cdef float nearestIntersectionZ = 100000000
+    cdef float nearestIntersectionZ = 1000000000
     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
     cdef float dot, shade
     cdef float R, G, B
     cdef (float, float, float) intersection, rayd, trinorm
-    cdef int count = 0
     for triangleIdx in range(0, numTris):
         triangle = tris[triangleIdx]
-        count = count + 1
         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
 
         if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:

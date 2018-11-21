@@ -848,7 +848,7 @@ struct __pyx_ctuple_float__and_float__and_float {
 
 /* "c_mathhelp.pyx":202
  * def castRay(ray, tris, numTris):
- *     cdef float nearestIntersectionZ = 10000000
+ *     cdef float nearestIntersectionZ = 1000000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)             # <<<<<<<<<<<<<<
  *     cdef float dot, shade
  *     cdef float R, G, B
@@ -1209,7 +1209,6 @@ static const char __pyx_k_rayd[] = "rayd";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_tris[] = "tris";
 static const char __pyx_k_color[] = "color";
-static const char __pyx_k_count[] = "count";
 static const char __pyx_k_cross[] = "cross";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_right[] = "right";
@@ -1267,7 +1266,6 @@ static PyObject *__pyx_kp_s_c_mathhelp_pyx;
 static PyObject *__pyx_n_s_castRay;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_color;
-static PyObject *__pyx_n_s_count;
 static PyObject *__pyx_n_s_cross;
 static PyObject *__pyx_n_s_d;
 static PyObject *__pyx_n_s_dirv;
@@ -3713,7 +3711,7 @@ static __pyx_ctuple_float__and_float__and_float __pyx_f_10c_mathhelp_c_triangleL
  *     return Q
  * 
  * def castRay(ray, tris, numTris):             # <<<<<<<<<<<<<<
- *     cdef float nearestIntersectionZ = 10000000
+ *     cdef float nearestIntersectionZ = 1000000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  */
 
@@ -3801,7 +3799,6 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_ctuple_float__and_float__and_float __pyx_v_intersection;
   __pyx_ctuple_float__and_float__and_float __pyx_v_rayd;
   __pyx_ctuple_float__and_float__and_float __pyx_v_trinorm;
-  int __pyx_v_count;
   PyObject *__pyx_v_triangleIdx = NULL;
   PyObject *__pyx_v_triangle = NULL;
   PyObject *__pyx_r = NULL;
@@ -3826,15 +3823,15 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
   /* "c_mathhelp.pyx":201
  * 
  * def castRay(ray, tris, numTris):
- *     cdef float nearestIntersectionZ = 10000000             # <<<<<<<<<<<<<<
+ *     cdef float nearestIntersectionZ = 1000000000             # <<<<<<<<<<<<<<
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  *     cdef float dot, shade
  */
-  __pyx_v_nearestIntersectionZ = 10000000.0;
+  __pyx_v_nearestIntersectionZ = 1000000000.0;
 
   /* "c_mathhelp.pyx":202
  * def castRay(ray, tris, numTris):
- *     cdef float nearestIntersectionZ = 10000000
+ *     cdef float nearestIntersectionZ = 1000000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)             # <<<<<<<<<<<<<<
  *     cdef float dot, shade
  *     cdef float R, G, B
@@ -3847,20 +3844,11 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
   /* "c_mathhelp.pyx":206
  *     cdef float R, G, B
  *     cdef (float, float, float) intersection, rayd, trinorm
- *     cdef int count = 0             # <<<<<<<<<<<<<<
- *     for triangleIdx in range(0, numTris):
- *         triangle = tris[triangleIdx]
- */
-  __pyx_v_count = 0;
-
-  /* "c_mathhelp.pyx":207
- *     cdef (float, float, float) intersection, rayd, trinorm
- *     cdef int count = 0
  *     for triangleIdx in range(0, numTris):             # <<<<<<<<<<<<<<
  *         triangle = tris[triangleIdx]
- *         count = count + 1
+ *         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
  */
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -3868,16 +3856,16 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
   __Pyx_INCREF(__pyx_v_numTris);
   __Pyx_GIVEREF(__pyx_v_numTris);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_numTris);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
     __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 206, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   for (;;) {
@@ -3885,17 +3873,17 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 207, __pyx_L1_error)
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 206, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 206, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 207, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 206, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 206, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
@@ -3905,7 +3893,7 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 207, __pyx_L1_error)
+          else __PYX_ERR(0, 206, __pyx_L1_error)
         }
         break;
       }
@@ -3914,68 +3902,59 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_XDECREF_SET(__pyx_v_triangleIdx, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "c_mathhelp.pyx":208
- *     cdef int count = 0
+    /* "c_mathhelp.pyx":207
+ *     cdef (float, float, float) intersection, rayd, trinorm
  *     for triangleIdx in range(0, numTris):
  *         triangle = tris[triangleIdx]             # <<<<<<<<<<<<<<
- *         count = count + 1
  *         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
+ * 
  */
-    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_tris, __pyx_v_triangleIdx); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_tris, __pyx_v_triangleIdx); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_XDECREF_SET(__pyx_v_triangle, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "c_mathhelp.pyx":209
+    /* "c_mathhelp.pyx":208
  *     for triangleIdx in range(0, numTris):
  *         triangle = tris[triangleIdx]
- *         count = count + 1             # <<<<<<<<<<<<<<
- *         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
- * 
- */
-    __pyx_v_count = (__pyx_v_count + 1);
-
-    /* "c_mathhelp.pyx":210
- *         triangle = tris[triangleIdx]
- *         count = count + 1
  *         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)             # <<<<<<<<<<<<<<
  * 
  *         if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_A); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_A); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_6 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_B); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_B); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_7 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_C); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_C); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_8 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_8 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_ray, __pyx_n_s_start); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_ray, __pyx_n_s_start); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_9 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_9 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_ray, __pyx_n_s_end); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_ray, __pyx_n_s_end); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_intersection = __pyx_f_10c_mathhelp_c_triangleLineIntersect(__pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10);
 
-    /* "c_mathhelp.pyx":212
+    /* "c_mathhelp.pyx":210
  *         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
  * 
  *         if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:             # <<<<<<<<<<<<<<
  *                     nearestIntersectionZ = intersection[2]
  *                     rayd = c_normalize(c_subtractPoint(intersection, ray.start))
  */
-    __pyx_t_3 = __pyx_convert__to_py___pyx_ctuple_float__and_float__and_float(__pyx_v_intersection); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_3 = __pyx_convert__to_py___pyx_ctuple_float__and_float__and_float(__pyx_v_intersection); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_12 = PyObject_RichCompare(__pyx_t_3, __pyx_tuple_, Py_NE); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_12 = PyObject_RichCompare(__pyx_t_3, __pyx_tuple_, Py_NE); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     if (__pyx_t_13) {
     } else {
@@ -3993,7 +3972,7 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_L6_bool_binop_done:;
     if (__pyx_t_11) {
 
-      /* "c_mathhelp.pyx":213
+      /* "c_mathhelp.pyx":211
  * 
  *         if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:
  *                     nearestIntersectionZ = intersection[2]             # <<<<<<<<<<<<<<
@@ -4002,27 +3981,27 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
  */
       __pyx_v_nearestIntersectionZ = __pyx_v_intersection.f2;
 
-      /* "c_mathhelp.pyx":214
+      /* "c_mathhelp.pyx":212
  *         if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:
  *                     nearestIntersectionZ = intersection[2]
  *                     rayd = c_normalize(c_subtractPoint(intersection, ray.start))             # <<<<<<<<<<<<<<
  *                     trinorm = c_normalize(triangle.normal())
  *                     dot = c_dotproduct(rayd, trinorm)
  */
-      __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_ray, __pyx_n_s_start); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 214, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_ray, __pyx_n_s_start); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 212, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_12); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+      __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_12); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 212, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __pyx_v_rayd = __pyx_f_10c_mathhelp_c_normalize(__pyx_f_10c_mathhelp_c_subtractPoint(__pyx_v_intersection, __pyx_t_10));
 
-      /* "c_mathhelp.pyx":215
+      /* "c_mathhelp.pyx":213
  *                     nearestIntersectionZ = intersection[2]
  *                     rayd = c_normalize(c_subtractPoint(intersection, ray.start))
  *                     trinorm = c_normalize(triangle.normal())             # <<<<<<<<<<<<<<
  *                     dot = c_dotproduct(rayd, trinorm)
  *                     shade =  (0.3 + (0.7 * abs(dot)))
  */
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_normal); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_normal); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_14 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -4036,14 +4015,14 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
       }
       __pyx_t_12 = (__pyx_t_14) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_14) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
       __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
-      if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 215, __pyx_L1_error)
+      if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 213, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_12); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+      __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_float__and_float__and_float(__pyx_t_12); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __pyx_v_trinorm = __pyx_f_10c_mathhelp_c_normalize(__pyx_t_10);
 
-      /* "c_mathhelp.pyx":216
+      /* "c_mathhelp.pyx":214
  *                     rayd = c_normalize(c_subtractPoint(intersection, ray.start))
  *                     trinorm = c_normalize(triangle.normal())
  *                     dot = c_dotproduct(rayd, trinorm)             # <<<<<<<<<<<<<<
@@ -4052,7 +4031,7 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
  */
       __pyx_v_dot = __pyx_f_10c_mathhelp_c_dotproduct(__pyx_v_rayd, __pyx_v_trinorm);
 
-      /* "c_mathhelp.pyx":217
+      /* "c_mathhelp.pyx":215
  *                     trinorm = c_normalize(triangle.normal())
  *                     dot = c_dotproduct(rayd, trinorm)
  *                     shade =  (0.3 + (0.7 * abs(dot)))             # <<<<<<<<<<<<<<
@@ -4061,73 +4040,73 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
  */
       __pyx_v_shade = (0.3 + (0.7 * fabsf(__pyx_v_dot)));
 
-      /* "c_mathhelp.pyx":218
+      /* "c_mathhelp.pyx":216
  *                     dot = c_dotproduct(rayd, trinorm)
  *                     shade =  (0.3 + (0.7 * abs(dot)))
  *                     R = triangle.color[0] * shade             # <<<<<<<<<<<<<<
  *                     G = triangle.color[1] * shade
  *                     B = triangle.color[2] * shade
  */
-      __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_color); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_color); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 216, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_12, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_12, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_shade); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_shade); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 216, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_14 = PyNumber_Multiply(__pyx_t_3, __pyx_t_12); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_14 = PyNumber_Multiply(__pyx_t_3, __pyx_t_12); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 216, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_t_14); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_t_14); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 216, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
       __pyx_v_R = __pyx_t_15;
 
-      /* "c_mathhelp.pyx":219
+      /* "c_mathhelp.pyx":217
  *                     shade =  (0.3 + (0.7 * abs(dot)))
  *                     R = triangle.color[0] * shade
  *                     G = triangle.color[1] * shade             # <<<<<<<<<<<<<<
  *                     B = triangle.color[2] * shade
  *                     nearestIntersectionColor = (<int>R, <int>G, <int>B)
  */
-      __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_color); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 219, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_color); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 217, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_12 = __Pyx_GetItemInt(__pyx_t_14, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 219, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_GetItemInt(__pyx_t_14, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 217, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-      __pyx_t_14 = PyFloat_FromDouble(__pyx_v_shade); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 219, __pyx_L1_error)
+      __pyx_t_14 = PyFloat_FromDouble(__pyx_v_shade); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 217, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_3 = PyNumber_Multiply(__pyx_t_12, __pyx_t_14); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
+      __pyx_t_3 = PyNumber_Multiply(__pyx_t_12, __pyx_t_14); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 217, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 219, __pyx_L1_error)
+      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 217, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_v_G = __pyx_t_15;
 
-      /* "c_mathhelp.pyx":220
+      /* "c_mathhelp.pyx":218
  *                     R = triangle.color[0] * shade
  *                     G = triangle.color[1] * shade
  *                     B = triangle.color[2] * shade             # <<<<<<<<<<<<<<
  *                     nearestIntersectionColor = (<int>R, <int>G, <int>B)
  *     return nearestIntersectionColor
  */
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_color); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_triangle, __pyx_n_s_color); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_14 = __Pyx_GetItemInt(__pyx_t_3, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_GetItemInt(__pyx_t_3, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 218, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = PyFloat_FromDouble(__pyx_v_shade); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_3 = PyFloat_FromDouble(__pyx_v_shade); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_12 = PyNumber_Multiply(__pyx_t_14, __pyx_t_3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_12 = PyNumber_Multiply(__pyx_t_14, __pyx_t_3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 218, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_t_12); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_t_12); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 218, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __pyx_v_B = __pyx_t_15;
 
-      /* "c_mathhelp.pyx":221
+      /* "c_mathhelp.pyx":219
  *                     G = triangle.color[1] * shade
  *                     B = triangle.color[2] * shade
  *                     nearestIntersectionColor = (<int>R, <int>G, <int>B)             # <<<<<<<<<<<<<<
@@ -4138,7 +4117,7 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
       __pyx_t_1.f2 = ((int)__pyx_v_B);
       __pyx_v_nearestIntersectionColor = __pyx_t_1;
 
-      /* "c_mathhelp.pyx":212
+      /* "c_mathhelp.pyx":210
  *         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
  * 
  *         if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:             # <<<<<<<<<<<<<<
@@ -4147,23 +4126,23 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
  */
     }
 
-    /* "c_mathhelp.pyx":207
+    /* "c_mathhelp.pyx":206
+ *     cdef float R, G, B
  *     cdef (float, float, float) intersection, rayd, trinorm
- *     cdef int count = 0
  *     for triangleIdx in range(0, numTris):             # <<<<<<<<<<<<<<
  *         triangle = tris[triangleIdx]
- *         count = count + 1
+ *         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
  */
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "c_mathhelp.pyx":222
+  /* "c_mathhelp.pyx":220
  *                     B = triangle.color[2] * shade
  *                     nearestIntersectionColor = (<int>R, <int>G, <int>B)
  *     return nearestIntersectionColor             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __pyx_convert__to_py___pyx_ctuple_int__and_int__and_int(__pyx_v_nearestIntersectionColor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert__to_py___pyx_ctuple_int__and_int__and_int(__pyx_v_nearestIntersectionColor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -4173,7 +4152,7 @@ static PyObject *__pyx_pf_10c_mathhelp_16castRay(CYTHON_UNUSED PyObject *__pyx_s
  *     return Q
  * 
  * def castRay(ray, tris, numTris):             # <<<<<<<<<<<<<<
- *     cdef float nearestIntersectionZ = 10000000
+ *     cdef float nearestIntersectionZ = 1000000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  */
 
@@ -4262,7 +4241,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_castRay, __pyx_k_castRay, sizeof(__pyx_k_castRay), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_color, __pyx_k_color, sizeof(__pyx_k_color), 0, 0, 1, 1},
-  {&__pyx_n_s_count, __pyx_k_count, sizeof(__pyx_k_count), 0, 0, 1, 1},
   {&__pyx_n_s_cross, __pyx_k_cross, sizeof(__pyx_k_cross), 0, 0, 1, 1},
   {&__pyx_n_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 1},
   {&__pyx_n_s_dirv, __pyx_k_dirv, sizeof(__pyx_k_dirv), 0, 0, 1, 1},
@@ -4313,7 +4291,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 206, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4323,14 +4301,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "c_mathhelp.pyx":212
+  /* "c_mathhelp.pyx":210
  *         intersection =  c_triangleLineIntersect(triangle.A, triangle.B, triangle.C, ray.start, ray.end)
  * 
  *         if intersection != (-1, -1, -1) and intersection[2] > 0.0 and intersection[2] < nearestIntersectionZ:             # <<<<<<<<<<<<<<
  *                     nearestIntersectionZ = intersection[2]
  *                     rayd = c_normalize(c_subtractPoint(intersection, ray.start))
  */
-  __pyx_tuple_ = PyTuple_Pack(3, __pyx_int_neg_1, __pyx_int_neg_1, __pyx_int_neg_1); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 212, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(3, __pyx_int_neg_1, __pyx_int_neg_1, __pyx_int_neg_1); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
@@ -4434,13 +4412,13 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     return Q
  * 
  * def castRay(ray, tris, numTris):             # <<<<<<<<<<<<<<
- *     cdef float nearestIntersectionZ = 10000000
+ *     cdef float nearestIntersectionZ = 1000000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  */
-  __pyx_tuple__18 = PyTuple_Pack(16, __pyx_n_s_ray, __pyx_n_s_tris, __pyx_n_s_numTris, __pyx_n_s_nearestIntersectionZ, __pyx_n_s_nearestIntersectionColor, __pyx_n_s_dot, __pyx_n_s_shade, __pyx_n_s_R, __pyx_n_s_G, __pyx_n_s_B, __pyx_n_s_intersection, __pyx_n_s_rayd, __pyx_n_s_trinorm, __pyx_n_s_count, __pyx_n_s_triangleIdx, __pyx_n_s_triangle); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(15, __pyx_n_s_ray, __pyx_n_s_tris, __pyx_n_s_numTris, __pyx_n_s_nearestIntersectionZ, __pyx_n_s_nearestIntersectionColor, __pyx_n_s_dot, __pyx_n_s_shade, __pyx_n_s_R, __pyx_n_s_G, __pyx_n_s_B, __pyx_n_s_intersection, __pyx_n_s_rayd, __pyx_n_s_trinorm, __pyx_n_s_triangleIdx, __pyx_n_s_triangle); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_c_mathhelp_pyx, __pyx_n_s_castRay, 200, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_c_mathhelp_pyx, __pyx_n_s_castRay, 200, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4818,7 +4796,7 @@ if (!__Pyx_RefNanny) {
  *     return Q
  * 
  * def castRay(ray, tris, numTris):             # <<<<<<<<<<<<<<
- *     cdef float nearestIntersectionZ = 10000000
+ *     cdef float nearestIntersectionZ = 1000000000
  *     cdef (int, int, int) nearestIntersectionColor = (0, 0, 0)
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10c_mathhelp_17castRay, NULL, __pyx_n_s_c_mathhelp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)

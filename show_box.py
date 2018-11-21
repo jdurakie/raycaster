@@ -1,6 +1,7 @@
 import ScreenPlane
 import meshbuilder
 import rotations
+import ShapeMesh
 #import PngImageRenderer as ImageRenderer
 #import CursesImageRenderer as ImageRenderer #BROKEN WHILE BENCHMARKING CODE IS INCLUDED
 import PygameRenderer as ImageRenderer
@@ -15,16 +16,16 @@ def show_box(width, height):
 	#create output image
 	image = ImageRenderer.ImageRenderer((width, height))
 	#create box mesh
-	#boxMesh = meshbuilder.makeBox()
-	boxMesh = meshbuilder.makeBox2((width/2, height/2, 30), 10)
+	boxShape = ShapeMesh.ShapeMesh(meshbuilder.makeBox2((width/2, height/2, 30), 10))
+	#boxShape = ShapeMesh.ShapeMesh(meshbuilder.makeTriangle())
 	#rotate the box around a little while keeping track of FPS
 	lastFrameTime = time.time()
 	frameCount = 0
 	totalFrameTime = 0
 	while(True):
-		rotations.rotateTrisAroundCentroidInX(boxMesh, math.sin(time.time()) / 10)
-		rotations.rotateTrisAroundCentroidInY(boxMesh, math.sin(time.time()) / 10)
-		rotations.rotateTrisAroundCentroidInZ(boxMesh, 0.1)
+		boxShape.rotateAroundCentroidInX(math.sin(time.time()) / 10)
+		boxShape.rotateAroundCentroidInY(math.sin(time.time()) / 10)
+		boxShape.rotateAroundCentroidInZ(0.1)
 		#start casting some rays and drawing them on output image
 		rayGenerator = screen.rayGenerator()
 
@@ -35,7 +36,7 @@ def show_box(width, height):
 				ray, screenCoord = next(rayGenerator)
 			except StopIteration:
 				break
-			image.point(screenCoord, c_mathhelp.castRay(ray, boxMesh, len(boxMesh)))	
+			image.point(screenCoord, c_mathhelp.castRay(ray, boxShape.tris, len(boxShape.tris)))	
 
 		image.saveImage('outputs/box.png')
 

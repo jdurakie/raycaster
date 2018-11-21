@@ -49,6 +49,16 @@ def distanceFromPointToLine(point, line):
     H = c_mathhelp.magnitude(normPoint)
     return math.sin(a) * H
 
+def distanceFromPointToLine2(point, line):
+
+    numerator_left = c_mathhelp.subtractPoint(point, line.start)
+    numerator_right = c_mathhelp.subtractPoint(point, line.end)
+    numerator = c_mathhelp.cross(numerator_left, numerator_right)
+    numerator = c_mathhelp.magnitude(numerator)
+    denominator = c_mathhelp.subtractPoint(line.end, line.start)
+    denominator = c_mathhelp.magnitude(denominator)
+    return numerator / denominator
+
 def lineImpactsSphere(sphere, line):
     dist = distanceFromPointToLine(sphere.center, line)
     return dist < sphere.rad

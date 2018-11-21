@@ -25,6 +25,14 @@ def makeBox():
     ]
     return tris
 
+def makeTriangle():
+    A = (30, 30, 30)
+    B = (60, 30, 30)
+    C = (45, 55.981, 30)
+
+
+    return [T(A, B, C, color=RED)]
+
 
 def makeBox2(center, diameter):
     # CUBE VERTEX NAMES
