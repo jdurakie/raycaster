@@ -112,4 +112,6 @@ import mazewalker
 
 #mazewalker.mazewalker(64, 32)
 import show_box
-show_box.show_box(64, 64)
+#import cProfile
+#cProfile.run(show_box.show_box(70, 70))
+show_box.show_box(60, 60)
