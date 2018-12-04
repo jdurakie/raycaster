@@ -49,6 +49,37 @@ def getClosestColorName(inColor):
 
     return reverseColorValueMap[min_diff_color]
 
+def getClosestColorName2(inColor):
+    if inColor[0] == 0:
+        #BLACK, GREEN, BLUE, CYAN
+        if inColor[1] == 0:
+            #BLACK, BLUE
+            if inColor[2] == 0:
+                return "BLACK"
+            else:
+                return ".BLUE"
+        else:
+            #GREEN, CYAN
+            if inColor[2] == 0:
+                return ":GREEN"
+            else:
+                return "-CYAN"
+    else:
+        #WHITE, RED, YELLOW, MAGENTA
+        if inColor[1] == 0:
+            #RED, MAGENTA
+            if inColor[2] == 0:
+                return "=RED"
+            else:
+                return "+MAGENTA"
+        else:
+            #YELLOW, WHITE
+            if inColor[2] == 0:
+                return "$YELLOW"
+            else:
+                return "#WHITE"
+
+
 def getShade(triangle, ray, intersection):
     ray = mathhelp.normalize(Line.Line(ray.start, intersection).vectorize())
     trinorm = mathhelp.normalize(triangle.normal())

@@ -45,15 +45,15 @@ class ImageRenderer(object):
         return shades[shade]
 
     def rgb_to_char(self, color):
-        colorString = colormanip.getClosestColorName(color)
-        closestColorChar = colorString[0]
-        if closestColorChar == 'B':
+        colorString = colormanip.getClosestColorName2(color)
+        if colorString == 'BLACK':
             return ord(' ')
-        else:
-            return ord(closestColorChar)
+        closestColorChar = colorString[0]
+        return ord(closestColorChar)
 
     def point(self, location, color=(255, 0, 0)):
-        char = self.rgb_to_grayscale_char_2(color)
+        #char = self.rgb_to_grayscale_char_2(color)
+        char = self.rgb_to_char(color)
 
         maxHeight, maxWidth = self.screen.getmaxyx()
         if location[0] > maxWidth or location[1] > maxHeight:
